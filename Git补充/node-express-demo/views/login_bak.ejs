@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>登录页</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+     <!--  1. get  
+         不安全
+         请求参数会在地址栏显示 
+         请求发送的参数有上限大小
+         有缓存
+     2. post 请求参数会在请求体包含
+         相对安全
+         请求的参数在请求体(req)包含
+         请求数据大小没有上限
+         无缓存
+          -->
+      <form action="/doLogin" method="post">
+        用户名: <input type="text" class="username" name="username"><br>
+        密码: <input type="text" class="password" name="password"><br>
+        <input type="submit" value="登陆">
+      </form>
+      <span>么有账号?</span><a href="/reg">立即注册</a>
+  </body>
+</html>

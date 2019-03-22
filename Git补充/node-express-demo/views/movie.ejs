@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>电影页面</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <button class="btn1">获取电影数据</button>
+    <button class="btn2">ajax解决跨域</button>
+    
+    <script src="/lib/jquery-3.3.1.min.js"></script>
+
+
+    <!-- //与btn1的方法配合使用 -->
+    <script>
+        function cb(rs){
+            console.log('这是jsonp解决跨域的结果');
+            console.log(rs);
+        }
+    </script>
+    <!-- 地址后面要加callback=cb -->
+    <script src="https://api.douban.com/v2/movie/in_theaters?callback=cb"></script> 
+     
+    <script>
+        var url = 'https://api.douban.com/v2/movie/in_theaters';
+        $('.btn1').click(function(){
+            $.ajax({
+                url:url,
+                type:'get',
+                success:function(res){
+                    console.log(res);
+                }
+            })
+        })
+
+        $.ajax({
+            url:url,
+            type:'get',
+            dataType:'jsonp',
+            success:function(rs){
+                console.log(rs);
+
+            }
+        })
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ajax测试</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+     <h1>ajaxTest页面</h1>
+	<button class="btn1">发送一个ajax GET请求</button>
+	<button class="btn2">发送一个ajax POST请求</button>
+	<!-- <p class="msg"></p> -->
+	<p class="username"></p>
+	<p class="age"></p>
+	<script src="/lib/jquery-3.3.1.min.js"></script>
+     <script>
+     	
+		$('.btn1').click(function () {
+			// 1.ajax依赖于 XMLHttpRequest对象 
+	     	//  创建一个实例对象
+	     	var xhr = new XMLHttpRequest();
+	     	// 2. 设置请求方式 以及请求的url
+		    xhr.open('get','/ajaxTest/test1');
+		    // 3. 执行发送 ...
+		    xhr.send(null);
+		    // 4. 监听状态 
+		    xhr.onreadystatechange = function(){
+		    		// xhr.readyState 发送成功 等待结果
+		    		// xhr.status == 200  请求成功 返回结果
+		          if (xhr.readyState == 4 && xhr.status == 200) {
+		          	// 5. 获取结果
+		             console.log(xhr.responseText);
+		             // $('.msg').text(xhr.responseText);
+		             // 字符串
+		             var rs = xhr.responseText;
+		             // 白字符串 ==> 对象
+		             var user = JSON.parse(rs);
+		             $('.username').text(user.username);
+		             $('.age').text(user.age);
+		         }
+		    }
+		})
+		$('.btn2').click(function () {
+			// 1.ajax依赖于 XMLHttpRequest对象 
+	     	//  创建一个实例对象
+	     	var xhr = new XMLHttpRequest();
+	     	// 2. 设置请求方式 以及请求的url
+		    xhr.open('post','/ajaxTest/test2');
+		    // 2.1 post需要添加的 请求头内容类型
+		    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		    // 3. 执行发送 ...
+		    // xmlhttp.send("fname=Bill&lname=Gates");
+		    xhr.send("username=张胜男&age=30");
+		    // 4. 监听状态 
+		    xhr.onreadystatechange = function(){
+		    		// xhr.readyState 发送成功 等待结果
+		    		// xhr.status == 200  请求成功 返回结果
+		          if (xhr.readyState == 4 && xhr.status == 200) {
+		          	// 5. 获取结果
+		             console.log(xhr.responseText);
+		         }
+		    }
+		})
+     </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>登录页</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+      <form action="/doLogin" method="post">
+        用户名: <input type="text" class="username" name="username"><br>
+        密码: <input type="text" class="password" name="password"><br>
+        <input type="button" class="btn-login" value="登陆">
+      </form>
+      <span>么有账号?</span><a href="/reg">立即注册</a>
+
+      <script src="/lib/jquery-3.3.1.min.js"></script>
+      <script>
+         $('.btn-login').click(function(){
+           $.ajax({
+             url:'/doLoginAjax',
+             type:'post',
+             data:{
+               username:$('.username').val(),
+               password:$('.password').val()
+             },
+             success:function(){
+               window.location.href = '/succ';
+             }
+           })
+         })
+      </script>
+  </body>
+</html>
